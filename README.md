@@ -7,7 +7,7 @@ Create a playoff tournament using exclusively from CLI, that also keeps track of
 ### Requirements for project complettion
 - [x] Store teams
 - [x] Init teams in playoffs
-- [] Read scores from CLI
-- [] Store scores
-- [] Determine who won and who lost
-- [] Progress to next stage of playoffs
+- [x] Read scores from CLI
+- [x] Store scores (technically correct though we don't store info into the class for playoff W's... this could be removed ???) 
+- [x] Determine who won and who lost
+- [x] Progress to next stage of playoffs
