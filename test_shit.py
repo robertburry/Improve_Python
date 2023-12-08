@@ -1,10 +1,14 @@
+import logging
 from dataclasses import dataclass, field
 from typing import Tuple, List
 import random
 import time
 
+logging.basicConfig(level=logging.INFO, format='%(message)s')
+
 @dataclass (frozen=False)
 class PlayoffData:
+    """Data class to store playoff information."""
     team: List[str]
     conference: List[str]
     seed: List[int]
@@ -12,6 +16,7 @@ class PlayoffData:
 
 @dataclass (frozen=False)
 class RegularSeasonData:
+    """Data class to store regular season information."""
     team: str 
     conference: str
     in_playoffs: bool
@@ -20,10 +25,20 @@ class RegularSeasonData:
 
 @dataclass (frozen=False)
 class LeagueData:
+    """Data class to store information about the entire league."""
     teams: List[RegularSeasonData]
 
 # Function to simulate a playoff round
 def simulate_playoff_round(teams):
+    """
+    Simulates a playoff round and returns the winners.
+
+    Args:
+    teams (List): List of teams with their seeds.
+
+    Returns:
+    List: List of winners from the playoff round.
+    """
     winners = []
 
     # Sort teams and seeds before the playoff round
@@ -66,7 +81,7 @@ def simulate_playoff_round(teams):
 
     return winners
 
-
+# Initializing the Teams and their Conferences
 Teams_Conf = [('Arizona Cardinals', 'NFC'),('Atlanta Falcons', 'NFC'),('Baltimore Ravens', 'AFC'),('Buffalo Bills', 'AFC'),('Carolina Panthers', 'NFC'),
               ('Chicago Bears', 'NFC'),('Cincinnati Bengals', 'AFC'),('Cleveland Browns', 'AFC'),('Dallas Cowboys', 'NFC'),('Denver Broncos', 'AFC'),
               ('Detroit Lions', 'NFC'),('Green Bay Packers', 'NFC'),('Houston Texans', 'AFC'),('Indianapolis Colts', 'AFC'),('Jacksonville Jaguars', 'AFC'),
@@ -104,7 +119,7 @@ for conf in set(team.conference for team in teamlist):
 
 end_time = time.time()
 
-print(f"total time taken this loop: {end_time - start_time}s \n")
+logging.info(f"total time taken this loop: {end_time - start_time}s \n")
 
 NFL = LeagueData(teamlist)
 
@@ -120,6 +135,7 @@ for team_data in NFL.teams:
         playoff_data_instance.seed.append(team_data.seed)
 
 # Print the PlayoffData
+
 # print("Playoff Teams")
 # print("Teams:", playoff_data_instance.team)
 # print("Conferences:", playoff_data_instance.conference)
@@ -135,8 +151,8 @@ for x in range(len(playoff_data_instance.team)):
     else:
         afc_playoffs.append((playoff_data_instance.team[x], playoff_data_instance.seed[x]))
 
-print(f"AFC Playoffs are: {afc_playoffs} \n")
-print(f"NFC Playoffs are: {nfc_playoffs} \n")
+logging.info(f"AFC Playoffs are: {afc_playoffs}\n")
+logging.info(f"NFC Playoffs are: {nfc_playoffs}")
 
 # Simulate playoff rounds for AFC and NFC
 while len(afc_playoffs) > 1:
@@ -146,7 +162,7 @@ while len(nfc_playoffs) > 1:
     nfc_playoffs = simulate_playoff_round(nfc_playoffs)
 
 # Print the champions
-print(f"AFC Champion: {afc_playoffs[0][0]} Ranked: {afc_playoffs[0][1]}")
+print(f"\nAFC Champion: {afc_playoffs[0][0]} Ranked: {afc_playoffs[0][1]}")
 print(f"NFC Champion: {nfc_playoffs[0][0]} Ranked: {nfc_playoffs[0][1]}")
 
 # Simulate the final round for League Championship
@@ -156,5 +172,4 @@ while len(league_championship) > 1:
     league_championship = simulate_playoff_round(league_championship)
 
 # Print the League Champion
-league_champion = league_championship[0][0]
-print(f"League Champion: {league_champion} Ranked: {league_championship[0][1]}")
+print(f"League Champion: {league_championship[0][0]} Ranked: {league_championship[0][1]}")
