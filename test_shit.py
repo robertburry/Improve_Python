@@ -59,8 +59,10 @@ def simulate_playoff_round(teams):
         while True:
             try:
                 print(f"\nHome Team ({home_team} - Seed {seed1}) vs. Away Team ({away_team} - Seed {seed2}):")
-                score_home_team = int(input(f"{home_team}: "))
-                score_away_team = int(input(f"{away_team}: "))
+                #score_home_team = int(input(f"{home_team}: "))
+                #score_away_team = int(input(f"{away_team}: "))
+                score_home_team = random.randint(0,127)
+                score_away_team = random.randint(0,127)
 
                 # Check for a tie
                 if score_home_team == score_away_team:

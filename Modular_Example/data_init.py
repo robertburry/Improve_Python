@@ -33,7 +33,7 @@ def sort_teams_for_playoffs(teamlist):
         for i, teams in enumerate(teams_in_conf):
             teams.seed = i + 1
             teams.in_playoffs = i < 8
-            print(teams.in_playoffs)
+            # print(teams.in_playoffs)
     return [team for team in teamlist if team.in_playoffs]
 
 def create_league_data(teamlist):
